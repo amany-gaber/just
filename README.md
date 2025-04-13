@@ -1,69 +1,10 @@
-import uvicorn
-from fastapi import APIRouter
-from services import *
-
-service = APIRouter(
-    prefix="/voice",
-    tags=["Perdict"]
-)
-
-
-if __name__ == "__main__":
-    uvicorn.run(service)
-
-# uvicorn main:app --reload
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-from pydantic_settings import BaseSettings
-
-
-class Settings(BaseSettings):
-    APP_ROOT: str = "/api/v0"
-    APP_NAME: str = "voice"
-    APP_DESCRIPTION: str = "voice-toon"
-    DOMAIN: str = "0.0.0.0"
-    BACKEND_PORT: int = 8080
-    DEBUG_MODE: bool = True
-
-
-
-
-
-
-# fastapi packages:
-uvicorn
-fastapi
-pydantic
-pydantic_settings
-python-multipart
-# websockets
-
-# services packages:
-ultralytics
-pillow
-numpy
-onnxruntime-gpu
-onnxruntime
-numpy
-pydub
-soundfile
-psutil
-requests
-
-
-
+the frist on api/src
+1- python services/main.py
+2- cd ..
+3- make bulid
+4-uvicorn main:main --host 0.0.0.0 --port 8000
+5-docker ps  to take image name
+6- docker image name logs
+7-docker run -d -p 4444:4444 --name emotion-api emotion-inference-api
+8-docker build -t emotion-inference-api . if you chane in docker file or req file
+9-docker rm -f emotion-api
