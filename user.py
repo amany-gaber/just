@@ -1,4 +1,144 @@
-#main
+# user.py
+from fastapi import APIRouter, File, UploadFile, HTTPException
+import numpy as np
+from services import EmotionInference
+
+router = APIRouter(
+    prefix="/job-matcher",
+    tags=["predict"]
+)
+
+model_inference = EmotionInference()
+
+@router.post("/inference")
+async def inference(file: UploadFile = File(...)):
+    file_extension = file.filename.split(".")[-1].lower()
+    supported_formats = ["wav", "mp3", "ogg", "opus"]
+
+    if file_extension not in supported_formats:
+        raise HTTPException(status_code=400, detail="Unsupported file format. Please upload WAV, MP3, OGG, or OPUS.")
+
+    try:
+        audio_bytes = await file.read()
+
+        result = model_inference.run_inference(audio_bytes, file_extension)
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+
+
+
+
+# service/main
+import numpy as np
+import onnxruntime as ort
+import soundfile as sf
+import io
+from pydub import AudioSegment
+import os
+import subprocess
+import tempfile
+
+class EmotionInference:
+    def __init__(self):
+        model_dir = os.path.join(os.path.dirname(__file__), "..", "static")
+        self.model_path = os.path.join(model_dir, "wav2vec2_emotion.onnx")
+        self.session = self._load_model()
+        self.id2label = {0: "calm", 1: "neutral", 2: "anxiety", 3: "confidence"}
+
+    def _load_model(self):
+        if os.path.exists(self.model_path):
+            return ort.InferenceSession(self.model_path)
+        else:
+            raise FileNotFoundError(f"Model file not found at {self.model_path}")
+
+    def convert_opus_to_wav_with_ffmpeg(self, audio_bytes):
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".opus") as temp_in:
+            temp_in.write(audio_bytes)
+            temp_in_path = temp_in.name
+
+        temp_out_path = temp_in_path.replace(".opus", ".wav")
+
+        try:
+            result = subprocess.run(
+                ["ffmpeg", "-y", "-f", "ogg", "-c:a", "libopus", "-i", temp_in_path, temp_out_path],
+                check=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+            print(f"FFmpeg stdout: {result.stdout}")
+            print(f"FFmpeg stderr: {result.stderr}")
+
+            with open(temp_out_path, "rb") as f:
+                wav_data = f.read()
+
+            return wav_data
+
+        except subprocess.CalledProcessError as e:
+            raise Exception(f"Error converting audio to WAV: {e.stderr}")
+        finally:
+            if os.path.exists(temp_in_path):
+                os.remove(temp_in_path)
+            if os.path.exists(temp_out_path):
+                os.remove(temp_out_path)
+
+    def convert_audio_to_wav(self, audio_bytes, format):
+        audio = AudioSegment.from_file(io.BytesIO(audio_bytes), format=format)
+        wav_io = io.BytesIO()
+        audio.export(wav_io, format="wav")
+        return wav_io.getvalue()
+
+    def preprocess_audio(self, audio_bytes, file_extension):
+        if file_extension in ["mp3", "ogg", "opus"]:
+            if file_extension == "opus":
+                audio_bytes = self.convert_opus_to_wav_with_ffmpeg(audio_bytes)
+            else:
+                audio_bytes = self.convert_audio_to_wav(audio_bytes, file_extension)
+
+        audio, samplerate = sf.read(io.BytesIO(audio_bytes))
+
+        if len(audio.shape) > 1:
+            audio = np.mean(audio, axis=1)
+
+        input_tensor = np.expand_dims(audio, axis=0).astype(np.float32)
+        return input_tensor
+
+    def softmax(self, logits):
+        exp_logits = np.exp(logits - np.max(logits))
+        return exp_logits / np.sum(exp_logits)
+
+    def run_inference(self, audio_bytes, file_extension):
+        input_tensor = self.preprocess_audio(audio_bytes, file_extension)
+        inputs = {self.session.get_inputs()[0].name: input_tensor}
+        outputs = self.session.run(None, inputs)
+
+        predicted_logits = outputs[0][0]
+        probabilities = self.softmax(predicted_logits)
+
+        sorted_indices = np.argsort(probabilities)[::-1]
+
+        top_emotion_index = sorted_indices[0]
+        top_emotion_label = self.id2label[top_emotion_index]
+        top_emotion_confidence = f"{round(probabilities[top_emotion_index] * 100)}%"
+
+        alternatives = {
+            self.id2label[i]: f"{round(probabilities[i] * 100)}%"
+            for i in sorted_indices[1:]
+        }
+
+        return {
+            "emotion": top_emotion_label,
+            "confidence": top_emotion_confidence,
+            "alternatives": alternatives
+        }
+
+
+
+
+# main.py
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from routes import router
@@ -42,8 +182,8 @@ if __name__ == "__main__":
 
 
 
+# main.py
 
-# requirements
 # FastAPI packages:
 uvicorn
 fastapi
@@ -52,98 +192,14 @@ pydantic_settings
 python-multipart
 
 # Services packages:
-faster-whisper==0.10.0
-fastapi==0.110.0
-uvicorn[standard]==0.29.0
-pydub==0.25.1
-soundfile==0.12.1
-transformers==4.40.0
-torch==2.1.0
-torchaudio==2.1.0
-
-
-
-
-
-
-
-# user
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from services import TranscribeService
-
-router = APIRouter(
-    prefix="/speech_to_text",
-    tags=["transcribe"]
-)
-
-transcriber = TranscribeService()
-
-@router.post("/")
-async def transcribe_audio(file: UploadFile = File(...)):
-    file_extension = file.filename.split(".")[-1].lower()
-    supported_formats = ["wav", "mp3", "ogg", "opus"]
-
-    if file_extension not in supported_formats:
-        raise HTTPException(status_code=400, detail="Unsupported audio format")
-
-    try:
-        audio_bytes = await file.read()
-        return transcriber.transcribe_from_bytes(audio_bytes, file_extension)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error during transcription: {str(e)}")
-
-
-
-
-
-
-# services/main
-import torch
-import torchaudio
-import os
-from transformers import Wav2Vec2ForSequenceClassification, Wav2Vec2FeatureExtractor
-
-class EmotionInference:
-    def __init__(self):
-        model_dir = "/home/yaz/STT/api/src/static/"
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-
-        self.feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained(model_dir)
-        self.model = Wav2Vec2ForSequenceClassification.from_pretrained(model_dir)
-        self.model.to(self.device)
-        self.model.eval()
-
-        self.id2label = self.model.config.id2label
-
-    def preprocess_audio(self, audio_bytes):
-        waveform, sr = torchaudio.load(audio_bytes)
-        if sr != 16000:
-            waveform = torchaudio.transforms.Resample(orig_freq=sr, new_freq=16000)(waveform)
-        return waveform.squeeze()
-
-    def run_inference(self, audio_bytes, file_extension):
-        # Save audio to a temporary file
-        import tempfile
-        with tempfile.NamedTemporaryFile(delete=False, suffix=f".{file_extension}") as f:
-            f.write(audio_bytes)
-            tmp_path = f.name
-
-        try:
-            waveform = self.preprocess_audio(tmp_path)
-            inputs = self.feature_extractor(waveform.numpy(), sampling_rate=16000, return_tensors="pt", padding=True)
-            inputs = {k: v.to(self.device) for k, v in inputs.items()}
-
-            with torch.no_grad():
-                logits = self.model(**inputs).logits
-                probs = torch.nn.functional.softmax(logits, dim=-1)[0]
-                top = torch.argmax(probs).item()
-                return {
-                    "emotion": self.id2label[str(top)],
-                    "confidence": f"{round(probs[top].item() * 100)}%",
-                    "alternatives": {
-                        self.id2label[str(i)]: f"{round(probs[i].item() * 100)}%"
-                        for i in range(len(probs)) if i != top
-                    }
-                }
-        finally:
-            os.remove(tmp_path)
+ultralytics
+pillow
+numpy
+onnxruntime
+numpy
+pydub
+librosa
+soundfile
+psutil
+requests
+python-dotenv
