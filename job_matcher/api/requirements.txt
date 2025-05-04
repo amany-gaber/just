@@ -1,0 +1,15 @@
+# FastAPI packages:
+uvicorn
+fastapi
+pydantic
+pydantic_settings
+python-multipart
+
+# Services packages:
+
+
+pandas
+python-docx
+PyPDF2
+scikit-learn
+numpy

@@ -1,0 +1,9 @@
+services:
+  api:
+    image: voice-api:1.0.0
+    ports:
+     - "${BACKEND_PORT:-8080}:8080"
+    container_name: voice_toon_api
+    restart: always
+    env_file:
+      - .env
