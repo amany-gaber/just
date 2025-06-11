@@ -1,3 +1,72 @@
+docker compose file 
+services:
+     fastapi:
+       build:
+         context: .
+         dockerfile: Dockerfile
+       ports:
+         - "2030:2030"
+       environment:
+         - MONGODB_URL=mongodb://mongodb:27017
+         - CELERY_BROKER_URL=redis://redis:6379/0
+         - CELERY_RESULT_BACKEND=redis://redis:6379/0
+       depends_on:
+         - mongodb
+         - redis
+       networks:
+         - interview-network
+
+     celery:
+       build:
+         context: .
+         dockerfile: Dockerfile
+       command: celery -A app.tasks worker --loglevel=info
+       environment:
+         - MONGODB_URL=mongodb://mongodb:27017
+         - CELERY_BROKER_URL=redis://redis:6379/0
+         - CELERY_RESULT_BACKEND=redis://redis:6379/0
+       depends_on:
+         - mongodb
+         - redis
+       networks:
+         - interview-network
+
+     mongodb:
+       image: mongo:6.0
+       ports:
+         - "27017:27017"
+       volumes:
+         - mongodb_data:/data/db
+       networks:
+         - interview-network
+
+     mongo-express:
+       image: mongo-express:latest
+       ports:
+         - "8027:8081"
+       environment:
+         - ME_CONFIG_MONGODB_SERVER=mongodb
+         - ME_CONFIG_MONGODB_PORT=27017
+         - ME_CONFIG_BASICAUTH=false
+       depends_on:
+         - mongodb
+       networks:
+         - interview-network
+
+     redis:
+       image: redis:7.0
+       networks:
+         - interview-network
+
+networks:
+     interview-network:
+       driver: bridge
+
+volumes:
+     mongodb_data:
+
+
+
 yaz@gpu:~/interview-system$ ls
  app  'app copy'   docker-compose.yml   Dockerfile   README.md   requirements.txt
 yaz@gpu:~/interview-system$ cd app
