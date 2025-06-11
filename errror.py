@@ -764,30 +764,11 @@ print(f"✅ Registered Celery tasks: {celery.tasks.keys()}")
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 yaz@gpu:~/interview-system$ docker compose down
 [+] Running 6/6
- ✔ Container interview-system-mongo-express-1  Removed                                                                                                  0.0s 
  ✔ Container interview-system-fastapi-1        Removed                                                                                                  0.0s 
  ✔ Container interview-system-celery-1         Removed                                                                                                  0.0s 
+ ✔ Container interview-system-mongo-express-1  Removed                                                                                                  0.0s 
  ✔ Container interview-system-redis-1          Removed                                                                                                  0.0s 
  ✔ Container interview-system-mongodb-1        Removed                                                                                                  0.0s 
  ✔ Network interview-system_interview-network  Removed                                                                                                  0.2s 
@@ -795,79 +776,77 @@ yaz@gpu:~/interview-system$ docker compose up --build
 Compose can now delegate builds to bake for better performance.
  To do so, set COMPOSE_BAKE=true.
 [+] Building 0.7s (16/19)                                                                                                                     docker:default
- => [celery internal] load build definition from Dockerfile                                                                                             0.0s
- => => transferring dockerfile: 240B                                                                                                                    0.0s
  => [fastapi internal] load build definition from Dockerfile                                                                                            0.0s
  => => transferring dockerfile: 240B                                                                                                                    0.0s
- => [fastapi internal] load metadata for docker.io/library/python:3.11-slim                                                                             0.6s
- => [celery internal] load .dockerignore                                                                                                                0.0s
- => => transferring context: 2B                                                                                                                         0.0s
+ => [celery internal] load build definition from Dockerfile                                                                                             0.0s
+ => => transferring dockerfile: 240B                                                                                                                    0.0s
+ => [celery internal] load metadata for docker.io/library/python:3.11-slim                                                                              0.6s
  => [fastapi internal] load .dockerignore                                                                                                               0.0s
+ => => transferring context: 2B                                                                                                                         0.0s
+ => [celery internal] load .dockerignore                                                                                                                0.0s
  => => transferring context: 2B                                                                                                                         0.0s
  => [fastapi 1/5] FROM docker.io/library/python:3.11-slim@sha256:74132ced0002947303bc75654c7d51d3818435fe1c0ec6e4d84f7ca4d0849878                       0.0s
  => => resolve docker.io/library/python:3.11-slim@sha256:74132ced0002947303bc75654c7d51d3818435fe1c0ec6e4d84f7ca4d0849878                               0.0s
  => [celery internal] load build context                                                                                                                0.0s
- => => transferring context: 507B                                                                                                                       0.0s
+ => => transferring context: 475B                                                                                                                       0.0s
  => [fastapi internal] load build context                                                                                                               0.0s
- => => transferring context: 507B                                                                                                                       0.0s
- => CACHED [fastapi 2/5] WORKDIR /app                                                                                                                   0.0s
- => CACHED [fastapi 3/5] COPY requirements.txt .                                                                                                        0.0s
- => CACHED [fastapi 4/5] RUN pip install --no-cache-dir -r requirements.txt                                                                             0.0s
- => CACHED [celery 5/5] COPY app/ ./app/                                                                                                                0.0s
- => [fastapi] exporting to image                                                                                                                        0.0s
- => => exporting layers                                                                                                                                 0.0s
- => => writing image sha256:6c014bf44a1e882448c5a99dadba5b2d731249747d3ca1d4848ba1c48c11efec                                                            0.0s
- => => naming to docker.io/library/interview-system-fastapi                                                                                             0.0s
+ => => transferring context: 475B                                                                                                                       0.0s
+ => CACHED [celery 2/5] WORKDIR /app                                                                                                                    0.0s
+ => CACHED [celery 3/5] COPY requirements.txt .                                                                                                         0.0s
+ => CACHED [celery 4/5] RUN pip install --no-cache-dir -r requirements.txt                                                                              0.0s
+ => CACHED [fastapi 5/5] COPY app/ ./app/                                                                                                               0.0s
  => [celery] exporting to image                                                                                                                         0.0s
  => => exporting layers                                                                                                                                 0.0s
- => => writing image sha256:a6a9adbe065448b38dcd93c43d22390c60273d07deffc486bc4c939dc45053c6                                                            0.0s
+ => => writing image sha256:1f46c94474309813549bf6564a5023f86a13f9d6ef041dafd8ca95b7edafb5da                                                            0.0s
  => => naming to docker.io/library/interview-system-celery                                                                                              0.0s
- => [fastapi] resolving provenance for metadata file                                                                                                    0.0s
+ => [fastapi] exporting to image                                                                                                                        0.0s
+ => => exporting layers                                                                                                                                 0.0s
+ => => writing image sha256:47733b1dd49fab7be95287f0f832e174be78a60afb09b5954e2b98221e810613                                                            0.0s
+ => => naming to docker.io/library/interview-system-fastapi                                                                                             0.0s
  => [celery] resolving provenance for metadata file                                                                                                     0.0s
+ => [fastapi] resolving provenance for metadata file                                                                                                    0.0s
 [+] Running 8/8
  ✔ celery                                      Built                                                                                                    0.0s 
  ✔ fastapi                                     Built                                                                                                    0.0s 
- ✔ Network interview-system_interview-network  Created                                                                                                  0.0s 
- ✔ Container interview-system-redis-1          Created                                                                                                  0.0s 
+ ✔ Network interview-system_interview-network  Created                                                                                                  0.1s 
  ✔ Container interview-system-mongodb-1        Created                                                                                                  0.0s 
- ✔ Container interview-system-mongo-express-1  Created                                                                                                  0.0s 
- ✔ Container interview-system-fastapi-1        Created                                                                                                  0.0s 
+ ✔ Container interview-system-redis-1          Created                                                                                                  0.0s 
  ✔ Container interview-system-celery-1         Created                                                                                                  0.0s 
+ ✔ Container interview-system-fastapi-1        Created                                                                                                  0.0s 
+ ✔ Container interview-system-mongo-express-1  Created                                                                                                  0.0s 
 Attaching to celery-1, fastapi-1, mongo-express-1, mongodb-1, redis-1
-redis-1          | 1:C 11 Jun 2025 09:18:21.587 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
-redis-1          | 1:C 11 Jun 2025 09:18:21.587 # Redis version=7.0.15, bits=64, commit=00000000, modified=0, pid=1, just started
-redis-1          | 1:C 11 Jun 2025 09:18:21.587 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
-redis-1          | 1:M 11 Jun 2025 09:18:21.587 * monotonic clock: POSIX clock_gettime
-redis-1          | 1:M 11 Jun 2025 09:18:21.588 * Running mode=standalone, port=6379.
-redis-1          | 1:M 11 Jun 2025 09:18:21.588 # Server initialized
-redis-1          | 1:M 11 Jun 2025 09:18:21.588 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
-redis-1          | 1:M 11 Jun 2025 09:18:21.589 * Ready to accept connections
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.671+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"-","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":17},"outgoing":{"minWireVersion":6,"maxWireVersion":17},"isInternalClient":true}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.671+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.673+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","namespace":"config.tenantMigrationDonors"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","namespace":"config.tenantMigrationRecipients"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"ShardSplitDonorService","namespace":"config.tenantSplitDonors"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"CONTROL",  "id":5945603, "ctx":"main","msg":"Multi threading initialized"}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"CONTROL",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":1,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"0fa3926efc04"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"6.0.22","gitVersion":"ee527360b84c6798535ee0895de3c7186b3522f9","openSSLVersion":"OpenSSL 3.0.2 15 Mar 2022","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu2204","distarch":"x86_64","target_arch":"x86_64"}}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"22.04"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.674+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"*"}}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.676+00:00"},"s":"I",  "c":"STORAGE",  "id":22270,   "ctx":"initandlisten","msg":"Storage engine to use detected by data files","attr":{"dbpath":"/data/db","storageEngine":"wiredTiger"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.676+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:21.676+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=63752M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,remove=true,path=journal,compressor=snappy),builtin_extension_config=(zstd=(compression_level=6)),file_manager=(close_idle_time=600,close_scan_interval=10,close_handle_minimum=2000),statistics_log=(wait=0),json_output=(error,message),verbose=[recovery_progress:1,checkpoint_progress:1,compact_progress:1,backup:0,checkpoint:0,compact:0,evict:0,history_store:0,recovery:0,rts:0,salvage:0,tiered:0,timestamp:0,transaction:0,verify:0,log:0],"}}
-mongo-express-1  | Waiting for mongo:27017...
+redis-1          | 1:C 11 Jun 2025 09:39:32.643 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1          | 1:C 11 Jun 2025 09:39:32.643 # Redis version=7.0.15, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1          | 1:C 11 Jun 2025 09:39:32.643 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis-1          | 1:M 11 Jun 2025 09:39:32.644 * monotonic clock: POSIX clock_gettime
+redis-1          | 1:M 11 Jun 2025 09:39:32.646 * Running mode=standalone, port=6379.
+redis-1          | 1:M 11 Jun 2025 09:39:32.646 # Server initialized
+redis-1          | 1:M 11 Jun 2025 09:39:32.646 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis-1          | 1:M 11 Jun 2025 09:39:32.647 * Ready to accept connections
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.744+00:00"},"s":"I",  "c":"NETWORK",  "id":4915701, "ctx":"-","msg":"Initialized wire specification","attr":{"spec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":17},"outgoing":{"minWireVersion":6,"maxWireVersion":17},"isInternalClient":true}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.744+00:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"-","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.746+00:00"},"s":"I",  "c":"NETWORK",  "id":4648601, "ctx":"main","msg":"Implicit TCP FastOpen unavailable. If TCP FastOpen is required, set tcpFastOpenServer, tcpFastOpenClient, and tcpFastOpenQueueSize."}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.747+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationDonorService","namespace":"config.tenantMigrationDonors"}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.747+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"TenantMigrationRecipientService","namespace":"config.tenantMigrationRecipients"}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.747+00:00"},"s":"I",  "c":"REPL",     "id":5123008, "ctx":"main","msg":"Successfully registered PrimaryOnlyService","attr":{"service":"ShardSplitDonorService","namespace":"config.tenantSplitDonors"}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.747+00:00"},"s":"I",  "c":"CONTROL",  "id":5945603, "ctx":"main","msg":"Multi threading initialized"}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.748+00:00"},"s":"I",  "c":"CONTROL",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":1,"port":27017,"dbPath":"/data/db","architecture":"64-bit","host":"171b260870eb"}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.748+00:00"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"6.0.22","gitVersion":"ee527360b84c6798535ee0895de3c7186b3522f9","openSSLVersion":"OpenSSL 3.0.2 15 Mar 2022","modules":[],"allocator":"tcmalloc","environment":{"distmod":"ubuntu2204","distarch":"x86_64","target_arch":"x86_64"}}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.748+00:00"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Ubuntu","version":"22.04"}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.748+00:00"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"*"}}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.750+00:00"},"s":"I",  "c":"STORAGE",  "id":22270,   "ctx":"initandlisten","msg":"Storage engine to use detected by data files","attr":{"dbpath":"/data/db","storageEngine":"wiredTiger"}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.750+00:00"},"s":"I",  "c":"STORAGE",  "id":22297,   "ctx":"initandlisten","msg":"Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem","tags":["startupWarnings"]}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:32.750+00:00"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=63752M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,remove=true,path=journal,compressor=snappy),builtin_extension_config=(zstd=(compression_level=6)),file_manager=(close_idle_time=600,close_scan_interval=10,close_handle_minimum=2000),statistics_log=(wait=0),json_output=(error,message),verbose=[recovery_progress:1,checkpoint_progress:1,compact_progress:1,backup:0,checkpoint:0,compact:0,evict:0,history_store:0,recovery:0,rts:0,salvage:0,tiered:0,timestamp:0,transaction:0,verify:0,log:0],"}}
 celery-1         | Usage: celery [OPTIONS] COMMAND [ARGS]...
 celery-1         | Try 'celery --help' for help.
 celery-1         | 
 celery-1         | Error: Invalid value for '-A' / '--app': 
 celery-1         | Unable to load celery application.
-celery-1         | While trying to load the module app.tasks:celery the following error occurred:
+celery-1         | While trying to load the module app.tasks.celery the following error occurred:
 celery-1         | Traceback (most recent call last):
 celery-1         |   File "/usr/local/lib/python3.11/site-packages/celery/bin/celery.py", line 58, in convert
 celery-1         |     return find_app(value)
 celery-1         |            ^^^^^^^^^^^^^^^
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.155+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":155124,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 7 through 8"}}}
 celery-1         |   File "/usr/local/lib/python3.11/site-packages/celery/app/utils.py", line 383, in find_app
 celery-1         |     sym = symbol_by_name(app, imp=imp)
 celery-1         |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -890,34 +869,12 @@ celery-1         |   File "/app/app/tasks.py", line 1, in <module>
 celery-1         |     import requests
 celery-1         | ModuleNotFoundError: No module named 'requests'
 celery-1         | 
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.200+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":200288,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 8 through 8"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.290+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":290646,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Main recovery loop: starting at 7/6656 to 8/256"}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.243+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":243330,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 9 through 10"}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.308+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":308071,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 10 through 10"}}}
 celery-1 exited with code 2
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.386+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":386515,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 7 through 8"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.446+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":446918,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 8 through 8"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.491+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":491788,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery log replay has successfully finished and ran for 336 milliseconds"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.491+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":491903,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Set global recovery timestamp: (0, 0)"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.491+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":491919,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Set global oldest timestamp: (0, 0)"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.492+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":492530,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery rollback to stable has successfully finished and ran for 0 milliseconds"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.494+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":494516,"thread":"1:0x78ed9337ccc0","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 1, snapshot max: 1 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 72581"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.497+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":497248,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery checkpoint has successfully finished and ran for 4 milliseconds"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.497+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633502,"ts_usec":497324,"thread":"1:0x78ed9337ccc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery was completed successfully and took 342ms, including 336ms for the log replay, 0ms for the rollback to stable, and 4ms for the checkpoint."}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.498+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":822}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.498+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.510+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.512+00:00"},"s":"W",  "c":"CONTROL",  "id":22167,   "ctx":"initandlisten","msg":"You are running on a NUMA machine. We suggest launching mongod like this to avoid performance problems: numactl --interleave=all mongod [other options]","tags":["startupWarnings"]}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.513+00:00"},"s":"W",  "c":"CONTROL",  "id":5123300, "ctx":"initandlisten","msg":"vm.max_map_count is too low","attr":{"currentValue":1048576,"recommendedMinimum":1677720,"maxConns":838860},"tags":["startupWarnings"]}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.517+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":17},"outgoing":{"minWireVersion":6,"maxWireVersion":17},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":17,"maxWireVersion":17},"outgoing":{"minWireVersion":17,"maxWireVersion":17},"isInternalClient":true}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.517+00:00"},"s":"I",  "c":"REPL",     "id":5853300, "ctx":"initandlisten","msg":"current featureCompatibilityVersion value","attr":{"featureCompatibilityVersion":"6.0","context":"startup"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.517+00:00"},"s":"I",  "c":"STORAGE",  "id":5071100, "ctx":"initandlisten","msg":"Clearing temp directory"}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.519+00:00"},"s":"I",  "c":"CONTROL",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.520+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.524+00:00"},"s":"I",  "c":"REPL",     "id":6015317, "ctx":"initandlisten","msg":"Setting new configuration state","attr":{"newState":"ConfigReplicationDisabled","oldState":"ConfigPreStart"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.524+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.526+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.526+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"0.0.0.0"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.526+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:18:22.526+00:00"},"s":"I",  "c":"CONTROL",  "id":8423403, "ctx":"initandlisten","msg":"mongod startup complete","attr":{"Summary of time elapsed":{"Startup from clean shutdown?":true,"Statistics":{"Transport layer setup":"0 ms","Run initial syncer crash recovery":"0 ms","Create storage engine lock file in the data directory":"0 ms","Create storage engine lock file in the data directory":"0 ms","Get metadata describing storage engine":"0 ms","Get metadata describing storage engine":"0 ms","Validate options in metadata against current startup options":"0 ms","Validate options in metadata against current startup options":"0 ms","Create storage engine":"0 ms","Create storage engine":"824 ms","Write current PID to file":"0 ms","Write current PID to file":"10 ms","Initialize FCV before rebuilding indexes":"0 ms","Initialize FCV before rebuilding indexes":"4 ms","Drop abandoned idents and get back indexes that need to be rebuilt or builds that need to be restarted":"0 ms","Drop abandoned idents and get back indexes that need to be rebuilt or builds that need to be restarted":"0 ms","Rebuild indexes for collections":"0 ms","Rebuild indexes for collections":"0 ms","Build user and roles graph":"0 ms","Set up the background thread pool responsible for waiting for opTimes to be majority committed":"0 ms","Start up the replication coordinator":"3 ms","Start transport layer":"1 ms","_initAndListen total elapsed time":"852 ms"}}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.406+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":405988,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Main recovery loop: starting at 9/5376 to 10/256"}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.518+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":518624,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 9 through 10"}}}
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.586+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":586187,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Recovering log 10 through 10"}}}
 fastapi-1        | Traceback (most recent call last):
 fastapi-1        |   File "/usr/local/bin/uvicorn", line 8, in <module>
 fastapi-1        |     sys.exit(main())
@@ -935,18 +892,27 @@ fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/click/core.py
 fastapi-1        |     return callback(*args, **kwargs)
 fastapi-1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^
 fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/uvicorn/main.py", line 410, in main
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.631+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":631064,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery log replay has successfully finished and ran for 388 milliseconds"}}}
 fastapi-1        |     run(
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.631+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":631165,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Set global recovery timestamp: (0, 0)"}}}
 fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/uvicorn/main.py", line 577, in run
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.631+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":631183,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"Set global oldest timestamp: (0, 0)"}}}
 fastapi-1        |     server.run()
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.631+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":631461,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery rollback to stable has successfully finished and ran for 0 milliseconds"}}}
 fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 65, in run
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.634+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":634400,"thread":"1:0x7ca3c5f67cc0","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 1, snapshot max: 1 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 72606"}}}
 fastapi-1        |     return asyncio.run(self.serve(sockets=sockets))
 fastapi-1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 fastapi-1        |   File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
 fastapi-1        |     return runner.run(main)
 fastapi-1        |            ^^^^^^^^^^^^^^^^
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.636+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":636456,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery checkpoint has successfully finished and ran for 4 milliseconds"}}}
 fastapi-1        |   File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.636+00:00"},"s":"I",  "c":"WTRECOV",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749634773,"ts_usec":636516,"thread":"1:0x7ca3c5f67cc0","session_name":"txn-recover","category":"WT_VERB_RECOVERY_PROGRESS","category_id":30,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"recovery was completed successfully and took 393ms, including 388ms for the log replay, 0ms for the rollback to stable, and 4ms for the checkpoint."}}}
 fastapi-1        |     return self._loop.run_until_complete(task)
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.637+00:00"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":887}}
 fastapi-1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.637+00:00"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
 fastapi-1        |   File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
 fastapi-1        |     return future.result()
 fastapi-1        |            ^^^^^^^^^^^^^^^
@@ -957,73 +923,52 @@ fastapi-1        |     config.load()
 fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/uvicorn/config.py", line 434, in load
 fastapi-1        |     self.loaded_app = import_from_string(self.app)
 fastapi-1        |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.643+00:00"},"s":"W",  "c":"CONTROL",  "id":22120,   "ctx":"initandlisten","msg":"Access control is not enabled for the database. Read and write access to data and configuration is unrestricted","tags":["startupWarnings"]}
 fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/uvicorn/importer.py", line 22, in import_from_string
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.646+00:00"},"s":"W",  "c":"CONTROL",  "id":22167,   "ctx":"initandlisten","msg":"You are running on a NUMA machine. We suggest launching mongod like this to avoid performance problems: numactl --interleave=all mongod [other options]","tags":["startupWarnings"]}
 fastapi-1        |     raise exc from None
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.646+00:00"},"s":"W",  "c":"CONTROL",  "id":5123300, "ctx":"initandlisten","msg":"vm.max_map_count is too low","attr":{"currentValue":1048576,"recommendedMinimum":1677720,"maxConns":838860},"tags":["startupWarnings"]}
 fastapi-1        |   File "/usr/local/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
 fastapi-1        |     module = importlib.import_module(module_str)
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.649+00:00"},"s":"I",  "c":"NETWORK",  "id":4915702, "ctx":"initandlisten","msg":"Updated wire specification","attr":{"oldSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":0,"maxWireVersion":17},"outgoing":{"minWireVersion":6,"maxWireVersion":17},"isInternalClient":true},"newSpec":{"incomingExternalClient":{"minWireVersion":0,"maxWireVersion":17},"incomingInternalClient":{"minWireVersion":17,"maxWireVersion":17},"outgoing":{"minWireVersion":17,"maxWireVersion":17},"isInternalClient":true}}}
 fastapi-1        |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.649+00:00"},"s":"I",  "c":"REPL",     "id":5853300, "ctx":"initandlisten","msg":"current featureCompatibilityVersion value","attr":{"featureCompatibilityVersion":"6.0","context":"startup"}}
 fastapi-1        |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.649+00:00"},"s":"I",  "c":"STORAGE",  "id":5071100, "ctx":"initandlisten","msg":"Clearing temp directory"}
 fastapi-1        |     return _bootstrap._gcd_import(name[level:], package, level)
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.651+00:00"},"s":"I",  "c":"CONTROL",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
 fastapi-1        |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.652+00:00"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"/data/db/diagnostic.data"}}
 fastapi-1        |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
 fastapi-1        |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.655+00:00"},"s":"I",  "c":"REPL",     "id":6015317, "ctx":"initandlisten","msg":"Setting new configuration state","attr":{"newState":"ConfigReplicationDisabled","oldState":"ConfigPreStart"}}
 fastapi-1        |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.656+00:00"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
 fastapi-1        |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.657+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"/tmp/mongodb-27017.sock"}}
 fastapi-1        |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.657+00:00"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"0.0.0.0"}}
 fastapi-1        |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.657+00:00"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27017,"ssl":"off"}}
 fastapi-1        |   File "/app/app/main.py", line 8, in <module>
+mongodb-1        | {"t":{"$date":"2025-06-11T09:39:33.657+00:00"},"s":"I",  "c":"CONTROL",  "id":8423403, "ctx":"initandlisten","msg":"mongod startup complete","attr":{"Summary of time elapsed":{"Startup from clean shutdown?":true,"Statistics":{"Transport layer setup":"0 ms","Run initial syncer crash recovery":"0 ms","Create storage engine lock file in the data directory":"0 ms","Create storage engine lock file in the data directory":"0 ms","Get metadata describing storage engine":"0 ms","Get metadata describing storage engine":"0 ms","Validate options in metadata against current startup options":"0 ms","Validate options in metadata against current startup options":"0 ms","Create storage engine":"0 ms","Create storage engine":"888 ms","Write current PID to file":"0 ms","Write current PID to file":"0 ms","Initialize FCV before rebuilding indexes":"0 ms","Initialize FCV before rebuilding indexes":"3 ms","Drop abandoned idents and get back indexes that need to be rebuilt or builds that need to be restarted":"0 ms","Drop abandoned idents and get back indexes that need to be rebuilt or builds that need to be restarted":"0 ms","Rebuild indexes for collections":"0 ms","Rebuild indexes for collections":"0 ms","Build user and roles graph":"0 ms","Set up the background thread pool responsible for waiting for opTimes to be majority committed":"0 ms","Start up the replication coordinator":"2 ms","Start transport layer":"0 ms","_initAndListen total elapsed time":"909 ms"}}}}
 fastapi-1        |     from app.tasks import process_question_audio
 fastapi-1        |   File "/app/app/tasks.py", line 1, in <module>
 fastapi-1        |     import requests
 fastapi-1        | ModuleNotFoundError: No module named 'requests'
 fastapi-1 exited with code 1
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:18:27 UTC 2025 retrying to connect to mongo:27017 (2/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:18:33 UTC 2025 retrying to connect to mongo:27017 (3/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:18:39 UTC 2025 retrying to connect to mongo:27017 (4/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:18:45 UTC 2025 retrying to connect to mongo:27017 (5/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:18:51 UTC 2025 retrying to connect to mongo:27017 (6/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:18:57 UTC 2025 retrying to connect to mongo:27017 (7/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:19:03 UTC 2025 retrying to connect to mongo:27017 (8/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:19:09 UTC 2025 retrying to connect to mongo:27017 (9/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | Wed Jun 11 09:19:15 UTC 2025 retrying to connect to mongo:27017 (10/10)
-mongo-express-1  | /docker-entrypoint.sh: line 15: mongo: Try again
-mongo-express-1  | /docker-entrypoint.sh: line 15: /dev/tcp/mongo/27017: Invalid argument
-mongo-express-1  | No custom config.js found, loading config.default.js
-mongo-express-1  | Welcome to mongo-express 1.0.2
-mongo-express-1  | ------------------------
-mongo-express-1  | 
-mongo-express-1  | 
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:21.721+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"192.168.64.6:57290","uuid":"a7773417-db85-4060-9bca-deab54a491f9","connectionId":1,"connectionCount":1}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:21.725+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn1","msg":"client metadata","attr":{"remote":"192.168.64.6:57290","client":"conn1","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs","version":"4.13.0"},"os":{"type":"Linux","name":"linux","architecture":"x64","version":"6.8.0-60-generic"},"platform":"Node.js v18.20.3, LE (unified)|Node.js v18.20.3, LE (unified)"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:21.733+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"192.168.64.6:57302","uuid":"2962b76f-be7b-4917-9d51-c1ca07aaa93f","connectionId":2,"connectionCount":2}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:21.734+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn2","msg":"client metadata","attr":{"remote":"192.168.64.6:57302","client":"conn2","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs","version":"4.13.0"},"os":{"type":"Linux","name":"linux","architecture":"x64","version":"6.8.0-60-generic"},"platform":"Node.js v18.20.3, LE (unified)|Node.js v18.20.3, LE (unified)"}}}
-mongo-express-1  | Mongo Express server listening at http://0.0.0.0:8081
-mongo-express-1  | Server is open to allow connections from anyone (0.0.0.0)
-mongo-express-1  | Basic authentication is disabled. It is recommended to set the useBasicAuth to true in the config.js.
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:22.513+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633562,"ts_usec":513031,"thread":"1:0x78ed8b36b640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 4, snapshot max: 4 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 72581"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:32.235+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"192.168.64.6:50034","uuid":"8781b247-e5f7-4e3b-98ca-4a7f1b08954f","connectionId":3,"connectionCount":3}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:19:32.236+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn3","msg":"client metadata","attr":{"remote":"192.168.64.6:50034","client":"conn3","negotiatedCompressors":[],"doc":{"driver":{"name":"nodejs","version":"4.13.0"},"os":{"type":"Linux","name":"linux","architecture":"x64","version":"6.8.0-60-generic"},"platform":"Node.js v18.20.3, LE (unified)|Node.js v18.20.3, LE (unified)"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:20:22.520+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633622,"ts_usec":520038,"thread":"1:0x78ed8b36b640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 6, snapshot max: 6 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 72581"}}}
-mongodb-1        | {"t":{"$date":"2025-06-11T09:21:22.525+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1749633682,"ts_usec":525082,"thread":"1:0x78ed8b36b640","session_name":"WT_SESSION.checkpoint","category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 8, snapshot max: 8 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 72581"}}}
+mongodb
 
 
-w Enable Watch
-  
+
+
+
+
+
+
+
+
+
+
+
+
