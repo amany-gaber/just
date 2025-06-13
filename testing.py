@@ -1,3 +1,12 @@
+sk_1604cdd8942fdf10ebbcd1537ceba80433494eb7d65cb458
+
+
+
+
+
+
+
+
 (newnev) yaz@gpu:~/Voice-toon/api$ docker run -d -p 4444:8080 voice-api
 07e331ff3cf0a3568aec4a7e94fd913659a76efeac641bb02a6ea83765634128
 docker: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint nifty_robinson (0ea010fa85533cb2e641700c6836efd5d8bb59b50918d2e94f06b14ca8cd12ef): Bind for 0.0.0.0:4444 failed: port is already allocated
